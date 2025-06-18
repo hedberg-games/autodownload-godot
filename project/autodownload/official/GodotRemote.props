@@ -1,0 +1,23 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!-- Properties defining URLs for downloading the Godot editor. -->
+        <GodotRemote>https://github.com/godotengine/godot</GodotRemote>
+        <GodotRemoteBranch>-stable</GodotRemoteBranch>
+        
+        <!-- Location where the different zip files for different platforms is located. -->
+        <!-- Official releases are grouped together based on Version and Branch. -->
+        <GodotRemoteReleases>$(GodotRemote)/releases/download/$(GodotVersion)$(GodotRemoteBranch)</GodotRemoteReleases>
+
+        <!-- Official Godot builds are destributed using zip files, and vary based on target OS and architecture -->
+        <GodotReleaseFileName Condition="$(IsGodotWin64)">Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_win64</GodotReleaseFileName>
+        <GodotReleaseFileName Condition="$(IsGodotWinARM)">Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_windows_arm64</GodotReleaseFileName>
+        <GodotReleaseFileName Condition="$(IsGodotLinux64)">Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_linux_x86_64</GodotReleaseFileName>
+        <GodotReleaseFileName Condition="$(IsGodotLinuxARM)">Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_linux_arm64</GodotReleaseFileName>
+        <GodotReleaseFileName Condition="$(IsGodotOSX64)">Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_macos.universal</GodotReleaseFileName>
+        <GodotReleaseFileName Condition="$(IsGodotOSXARM)">Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_macos.universal</GodotReleaseFileName>
+        
+        <!-- These properties generally shouldn't change, even for custom Godot builds. -->
+        <GodotReleaseZipFileName>$(GodotReleaseFileName).zip</GodotReleaseZipFileName>
+        <GodotDownloadUrl>$(GodotRemoteReleases)/$(GodotReleaseZipFileName)</GodotDownloadUrl>
+    </PropertyGroup>
+</Project>

@@ -1,0 +1,11 @@
+<!-- Configures which version of Godot will be used by the project.	-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	
+	<!-- The GodotHashes file controls the specific version of Godot. -->
+	<!-- Presets for official versions are available as subfolders in the /project/autodownload/official/ folder. -->
+    <Import Project="official/latest/GodotHashes.props"/>
+
+	<!-- The GodotRemote file controls which URLs are used. -->
+	<!-- Using a custom GodotRemote requires additional configuration. -->
+	<Import Project="official/GodotRemote.props"/>
+</Project>

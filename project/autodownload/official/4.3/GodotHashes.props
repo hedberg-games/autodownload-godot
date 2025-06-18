@@ -1,0 +1,18 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <!-- Version number and accompanying SHA512 hash values for the Godot editor. -->
+    <PropertyGroup>
+        <GodotVersion>4.3</GodotVersion>
+
+        <GodotCheckHash>true</GodotCheckHash>
+
+        <!-- Hash values for official Godot builds are available in the SHA512-SUMS.txt file in the official release -->
+        <GodotHash Condition="$(IsGodotWin64)">6fc1c187d7047d6b0a89e5e4495a63eb70a88209b7f283048f3b3d84d64047bc3addd7cfcb9a67a74441faea19dd8c465456b917cd9c3fc07f2131ee832e6e1e</GodotHash>
+        <GodotHash Condition="$(IsGodotWinARM)">bef9c2531a5496317ddadd749b00d87e11bac1ad9afe2faceab410df5777df422ee3759aafa13d7e3416c8146d572ed37614f7ae0c165810edbacd27c1572580</GodotHash>
+
+        <GodotHash Condition="$(IsGodotOSX64)">71eed3a033cef64f814ba2d14389780d30c558ecc9a216582cfe44dcbeaed3f3c26100da461590fc87dd3e8fdb53a19b6ac03720eb9140e9d1d0639c2be8493a</GodotHash>
+        <GodotHash Condition="$(IsGodotOSXARM)">71eed3a033cef64f814ba2d14389780d30c558ecc9a216582cfe44dcbeaed3f3c26100da461590fc87dd3e8fdb53a19b6ac03720eb9140e9d1d0639c2be8493a</GodotHash>
+
+        <GodotHash Condition="$(IsGodotLinux64)">33d0539bc368ff6f30b5f15d64ec893da8639bd607df83050b5df746c3d30da99238c26dd03a16d7fe31b3a3e58680aeb5545af8784d8ce01edeff07b061ac80</GodotHash>
+        <GodotHash Condition="$(IsGodotLinuxARM)">b7bcf47f71d4e8ecea654755d3e0c7bd6a038a39eb3f9b0f047895a36d486f0e8c658f43eb1b61dab962a53db6b8a2ddcba32bfdb3050049fdc10a8baca1761d</GodotHash>
+    </PropertyGroup>
+</Project>

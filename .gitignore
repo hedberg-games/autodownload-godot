@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+
+#Visual Studio ignores
+.vs/
+*.csproj.user
+
+#Locations used by the build system
+/editor

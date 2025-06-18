@@ -1,0 +1,28 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!-- Set OS and architecture to known, simple values (win/osx/linux and x64/arm)-->
+        <BuildPlatform Condition="$([MSBuild]::IsOsPlatform('Windows'))">win</BuildPlatform>
+        <BuildPlatform Condition="$([MSBuild]::IsOsPlatform('OSX'))">osx</BuildPlatform>
+        <BuildPlatform Condition="$([MSBuild]::IsOsPlatform('Linux'))">linux</BuildPlatform>
+
+        <BuildArchitecture Condition="$([System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture) == X64">x64</BuildArchitecture>
+        <BuildArchitecture Condition="$([System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture) == ARM64">arm</BuildArchitecture>
+
+        <!-- Establish simple lookups,  for use in MSBuild Conditions -->
+        <!-- Begin by defaulting to false-->
+        <IsGodotWin64>false</IsGodotWin64>
+        <IsGodotWinARM>false</IsGodotWinARM>
+        <IsGodotLinux64>false</IsGodotLinux64>
+        <IsGodotLinuxARM>false</IsGodotLinuxARM>
+        <IsGodotOSX64>false</IsGodotOSX64>
+        <IsGodotOSXARM>false</IsGodotOSXARM>
+
+        <!-- Override the value for the current OS + processor combo -->
+        <IsGodotWin64 Condition="$(BuildPlatform)==win and $(BuildArchitecture)==x64">true</IsGodotWin64>
+        <IsGodotWinARM Condition="$(BuildPlatform)==win and $(BuildArchitecture)==arm">true</IsGodotWinARM>
+        <IsGodotLinux64 Condition="$(BuildPlatform)==linux and $(BuildArchitecture)==x64">true</IsGodotLinux64>
+        <IsGodotLinuxARM Condition="$(BuildPlatform)==linux and $(BuildArchitecture)==arm">true</IsGodotLinuxARM>
+        <IsGodotOSX64 Condition="$(BuildPlatform)==osx and $(BuildArchitecture)==x64">true</IsGodotOSX64>
+        <IsGodotOSXARM Condition="$(BuildPlatform)==osx and $(BuildArchitecture)==arm">true</IsGodotOSXARM>
+    </PropertyGroup>
+</Project>

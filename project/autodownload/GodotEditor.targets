@@ -1,0 +1,53 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="GodotValidation" AfterTargets="build">
+        <Error Condition="!($(IsGodotWin64) or $(IsGodotWinARM) or $(IsGodotOSX64) or $(IsGodotOSXARM) or $(IsGodotLinux64) or $(IsGodotLinuxARM))" Text="Unsupported system - only Windows/OSX/Linux running x64/ARM64 processors are supported."/>
+    </Target>
+    
+    <Target Name="RemoveOldGodot" AfterTargets="GodotValidation" Condition="Exists($(GodotApp)) AND !Exists($(GodotVersionDetectionPath))">
+        <!-- Trying to install on top of an old version may leave outdated dlls hanging around. This cleans those up first. -->
+        <Message Text="Removing Old Godot Editor" Importance="high" />
+        <ItemGroup>
+            <OutdatedEditorFiles Include="$(GodotApp)" />
+            <OutdatedEditorFiles Include="$(GodotEditorDirectory)\GodotSharp\**\*" />
+            <OutdatedEditorFiles Condition="$(GodotExtraFile) != ''" Include="$(GodotExtraFile)" />
+            <OutdatedEditorFiles Include="$(GodotVersionDetectionPath)" />
+        </ItemGroup>
+        <!-- A rogue delete can cause mayhem - interrupt the build if the state is questionable. -->
+        <Message Text="Removing files '@(OutdatedEditorFiles)'" Importance="low" />
+        <Error Condition="$(GodotEditorDirectory) == ''"
+               Text="Using an empty GodotEditorDirectory is not supported"/>
+        <Error Condition="%(OutdatedEditorFiles.Directory) == ''"
+               Text="The editor cannot be stored in the root of the drive. Fix the configuration so that the editor is in its own folder." />
+        <Delete Files="@(OutdatedEditorFiles)" />
+    </Target>
+
+    <Target Name="InstallGodot" AfterTargets="RemoveOldGodot" Condition="!Exists($(GodotApp))">
+        <Message Text="Restoring Godot Editor" Importance="high" />
+        <MakeDir Directories="$(GodotEditorDirectory)"/>
+        <DownloadFile DestinationFolder="$(GodotTemporaryLocation)" SourceUrl="$(GodotDownloadUrl)" />
+
+        <!-- Make sure the expected file was downloaded -->
+        <VerifyFileHash Condition="$(GodotCheckHash)" File="$(GodotZipFile)" Hash="$(GodotHash)" Algorithm="SHA512"></VerifyFileHash>
+
+        <Unzip SourceFiles="$(GodotZipFile)" DestinationFolder="$(GodotTemporaryLocation)"/>
+
+        <!-- Move and rename the editor so it can be used via automation scripts -->
+        <Move SourceFiles="$(GodotAppBeforeRename)" DestinationFiles="$(GodotApp)"/>
+        
+        <!-- Move any other files in the zip (for Win/Linux only)-->
+        <ItemGroup>
+            <!-- per https://stackoverflow.com/a/15720600 and documented https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-well-known-item-metadata?view=vs-2022
+                When copying via the wildcard \**\*, it's necessary to leverage the %(RecursiveDir) to make sure it ends up in the right folder -->
+            <ZipContents Include="$(GodotZipFolder)\**\*" />
+        </ItemGroup>
+        <Move Condition="$(IsGodotWin64) or $(IsGodotWinARM) or $(IsGodotLinux64) or $(IsGodotLinuxARM)" SourceFiles="@(ZipContents)" DestinationFolder="$(GodotEditorDirectory)\%(RecursiveDir)"/>
+
+        <!-- Unix-like systems require that the app be flagged as executable -->
+        <Exec Condition="$(IsGodotOSX64) or $(IsGodotOSXARM) or $(IsGodotLinux64) or $(IsGodotLinuxARM)" Command="chmod a+x '$(GodotApp)'" />
+
+        <!-- Build can check for this directory to see if the correct version is installed -->
+        <MakeDir Directories="$(GodotVersionDetectionPath)"/>
+
+        <!-- Note: Retaining old files (ie. the zip) improves speed of partial incremental builds -->
+    </Target>
+</Project>

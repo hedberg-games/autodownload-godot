@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Run": {
+      "commandName": "Executable",
+      "executablePath": "$(SolutionDir)\\editor\\Godot.exe",
+      "workingDirectory": "$(SolutionDir)\\project"
+    },
+    "Editor": {
+      "commandName": "Executable",
+      "executablePath": "$(SolutionDir)\\editor\\Godot.exe",
+      "commandLineArgs": "-e",
+      "workingDirectory": "$(SolutionDir)\\project"
+    }
+  }
+}

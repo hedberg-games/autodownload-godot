@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "cwd": "${workspaceFolder}/project",
+      "program": "${workspaceFolder}/editor/Godot.exe",
+      "linux": {
+        "program": "${workspaceFolder}/editor/Godot"
+      },
+      "osx": {
+        "program": "${workspaceFolder}/editor/Godot.app"
+      }
+    },
+    {
+      "name": "Editor",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "cwd": "${workspaceFolder}/project",
+      "args": "-e",
+      "program": "${workspaceFolder}/editor/Godot.exe",
+      "linux": {
+        "program": "${workspaceFolder}/editor/Godot"
+      },
+      "osx": {
+        "program": "${workspaceFolder}/editor/Godot.app"
+      }
+    }
+  ]
+}

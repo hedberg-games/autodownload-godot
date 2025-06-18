@@ -1,0 +1,44 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!-- Locations on the file system -->
+        <!-- Note that that all directories listed here should be excluded from source control -->
+        <GodotEditorDirectory>$(SolutionDir)/editor</GodotEditorDirectory>
+        <GodotTemporaryLocation>$(GodotEditorDirectory)/.zip</GodotTemporaryLocation>
+        <GodotVersionDetectionPath>$(GodotEditorDirectory)/$(GodotVersion)</GodotVersionDetectionPath>
+
+        <GodotZipFile>$(GodotTemporaryLocation)/$(GodotReleaseZipFileName)</GodotZipFile>
+        <GodotZipFolder>$(GodotTemporaryLocation)/$(GodotReleaseFileName)</GodotZipFolder>
+    </PropertyGroup>
+    
+    <!-- Platform-specific paths -->
+    <PropertyGroup Condition="$(IsGodotWin64)">
+        <GodotApp>$(GodotEditorDirectory)/Godot.exe</GodotApp>
+        <GodotAppBeforeRename>$(GodotZipFolder)/Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_win64.exe</GodotAppBeforeRename>
+        <!-- Windows zips contain an extra exe file -->
+        <GodotExtraFile>$(GodotEditorDirectory)/Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_win64_console.exe</GodotExtraFile>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="$(IsGodotWinARM)">
+        <GodotApp>$(GodotEditorDirectory)/Godot.exe</GodotApp>
+        <GodotAppBeforeRename>$(GodotZipFolder)/Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_windows_arm64.exe</GodotAppBeforeRename>
+        <!-- Windows zips contain an extra exe file -->
+        <GodotExtraFile>$(GodotEditorDirectory)/Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_windows_arm64_console.exe</GodotExtraFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(IsGodotOSX64) or $(IsGodotOSXARM)">
+        <GodotApp>$(GodotEditorDirectory)/Godot.app</GodotApp>
+        <!-- OSX zips have a different file structure -->
+        <GodotZipFolder>$(GodotTemporaryLocation)/$(GodotReleaseFileName)</GodotZipFolder>
+        <GodotAppBeforeRename>$(GodotZipFolder)/Godot_mono.app</GodotAppBeforeRename>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(IsGodotLinux64)">
+        <GodotApp>$(GodotEditorDirectory)/Godot</GodotApp>
+        <GodotAppBeforeRename>$(GodotZipFolder)/Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_linux.x86_64</GodotAppBeforeRename>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(IsGodotLinuxARM)">
+        <GodotApp>$(GodotEditorDirectory)/Godot</GodotApp>
+        <GodotAppBeforeRename>$(GodotZipFolder)/Godot_v$(GodotVersion)$(GodotRemoteBranch)_mono_linux.arm64</GodotAppBeforeRename>
+    </PropertyGroup>
+</Project>

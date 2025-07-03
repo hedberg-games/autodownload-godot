@@ -12,7 +12,7 @@
         "program": "${workspaceFolder}/editor/Godot"
       },
       "osx": {
-        "program": "${workspaceFolder}/editor/Godot.app"
+        "program": "${workspaceFolder}/editor/Godot.app/Contents/MacOS/Godot"
       }
     },
     {
@@ -27,7 +27,7 @@
         "program": "${workspaceFolder}/editor/Godot"
       },
       "osx": {
-        "program": "${workspaceFolder}/editor/Godot.app"
+        "program": "${workspaceFolder}/editor/Godot.app/Contents/MacOS/Godot"
       }
     }
   ]

@@ -1,17 +1,17 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 <!-- Version number and accompanying SHA512 hash values for the Godot editor. -->
     <PropertyGroup>
-        <GodotVersion>4.4.1</GodotVersion>
+        <GodotVersion>4.5</GodotVersion>
         <GodotCheckHash>true</GodotCheckHash>
 
         <!-- Hash values for official Godot builds are available in the SHA512-SUMS.txt file in the official release -->
-        <GodotHash Condition="$(IsGodotWin64)">cc000092a21f7fd9f92ab979ee4b908f835127e2bacea66f57ed4c1617d8b7d0cba65feaabbe42a48d5bb05f9f2f6bd87db21f2e7deb2b964390e4349c0ea8e4</GodotHash>
-        <GodotHash Condition="$(IsGodotWinARM)">1f49fad5583ff3d8186258d5e1b186b0ca4db9a0936cadc6c8f092c017622ff81908104bd5dce1ec85acd8098870b36a6c81048c242de6a5ba24863c3f6dc871</GodotHash>
+        <GodotHash Condition="$(IsGodotWin64)">bd22d58a21a148fa02438306b5dfd5a15dd2dc072779ea45188ff43f24bf4a99cc64c6403c9a9a936c660d04a91220e50560e5deac1ace1e1e6eff71e8d9a7f0</GodotHash>
+        <GodotHash Condition="$(IsGodotWinARM)">71c10e8257da5b2346c1de06d99cda651c36c8d2570f4e39984fea2ee2134cb7d5579d10e1e8e7e086889a89544fb0e6a7b1c7d0560ff6cf8699aea63f0e9cc7</GodotHash>
 
-        <GodotHash Condition="$(IsGodotOSX64)">062ec6e2595f1de6b2a13feb6381db309fecc31a11d86d0eb0fcc508ae4349574573797cf553dbf2e7c5a30c60e7dcc9e5f5abecbd63a9cc87ff94292099015b</GodotHash>
-        <GodotHash Condition="$(IsGodotOSXARM)">062ec6e2595f1de6b2a13feb6381db309fecc31a11d86d0eb0fcc508ae4349574573797cf553dbf2e7c5a30c60e7dcc9e5f5abecbd63a9cc87ff94292099015b</GodotHash>
+        <GodotHash Condition="$(IsGodotOSX64)">59d195d1876210fa0f8c36bc10b147339fc8e076c684b74111533992f1a1dcdc0f760461f4cadad627e5b11e74468b54b9355fc6ea0c507c52533dfa7aa0c617</GodotHash>
+        <GodotHash Condition="$(IsGodotOSXARM)">59d195d1876210fa0f8c36bc10b147339fc8e076c684b74111533992f1a1dcdc0f760461f4cadad627e5b11e74468b54b9355fc6ea0c507c52533dfa7aa0c617</GodotHash>
 
-        <GodotHash Condition="$(IsGodotLinux64)">53508edb91e0674a5072cbcc438d5523697a54f434154637aecf7a6fa6c84ee1f93578ce263ddc951d5be73e70e031ff52ae2bf03f3716a44245fd56710543e9</GodotHash>
-        <GodotHash Condition="$(IsGodotLinuxARM)">5c2c1c5b71de2695be240d7519d5ee83dd6470cf6d9915ae2bc7c567ccf41219579c857027309fbf240b0151cd555ac4b34926bea2a0e7cf17a4f14f86d8c197</GodotHash>
+        <GodotHash Condition="$(IsGodotLinux64)">8cbfc3f8ef2e346aac72df3a0f71f4a7b05df575cbd8e0930aad7dc6a7ad79b3e27395184674a3718c376f49011a40689966bf243638d8e7efef4693dd3b276b</GodotHash>
+        <GodotHash Condition="$(IsGodotLinuxARM)">a962b34b81b0c1dd6f9a930389e8037eaf1024c7ea531612fd09b444c9b4a308d8e53acbec6c1f8d51bf14d7aa6fc0dcda5a3abc862d33f86cc63c39a044c1dc</GodotHash>
     </PropertyGroup>
 </Project>
